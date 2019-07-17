@@ -1,0 +1,21 @@
+<div>
+  <label>Server Name</label>
+  <input type="text" class="form-control" [(ngModel)]="serverName"/>
+</div>
+<div>
+  <button [disabled]="serverName === ''"
+          (click)="onCreateServer()"
+          class="btn btn-primary">
+    Add Server
+  </button>
+  <p>Allow new server: {{ disabled }}</p>
+</div>
+<div *ngIf="serverCreationStatus != ''; else noServer">
+  <p [ngStyle]="{backgroundColor: getColor()}" [ngClass]="{worked: getColor() === 'green'}">{{ serverCreationStatus }}</p>
+</div>
+<ng-template #noServer>
+  <p [ngStyle]="{backgroundColor: getColor()}">No server was created</p>
+</ng-template>
+<ul>
+  <li *ngFor="let item of servers">{{item}}</li>
+</ul>
