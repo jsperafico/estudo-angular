@@ -23,4 +23,8 @@ export class AppComponent {
       content: blueprintData.serverContent
     });
   }
+
+  removeFirstElement() {
+    this.serverElements.splice(0,1);
+  }
 }

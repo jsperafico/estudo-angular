@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -9,26 +9,31 @@ export class CockpitComponent implements OnInit {
   @Output() serverCreated = new EventEmitter<{ serverName: string, serverContent: string }>();
   @Output() blueprintCreated = new EventEmitter<{ serverName: string, serverContent: string }>();
 
-  newServerName = '';
   newServerContent = '';
+  @ViewChild('serverIdInput', { static: true }) idInput: ElementRef;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onAddServer() {
+  onAddServer(input: HTMLInputElement) {
+    console.log(this.idInput.nativeElement.value);
     this.serverCreated.emit({
-      serverName: this.newServerName,
+      serverName: input.value,
       serverContent: this.newServerContent
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(input: HTMLInputElement) {
+    console.log(this.idInput.nativeElement.value);
     this.blueprintCreated.emit({
-      serverName: this.newServerName,
+      serverName: input.value,
       serverContent: this.newServerContent
     });
   }
 
 }
+
+// Static True for OnInit() otherwise static should be false;
+// @ViewChild('serverContentInput', { static: true }) serverContentInput: ElementRef
